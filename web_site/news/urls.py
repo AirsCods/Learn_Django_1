@@ -18,5 +18,8 @@ from .views import *
 
 
 urlpatterns = [
-    path('', index, name='news'),
+    path('', index, name='home'),
+    path('cat/<int:category_id>', get_category, name='category'),
+    path('<int:news_id>/', view_news, name='view_news'),
+    path('<add-news/', add_news, name='add_news'),
 ]
