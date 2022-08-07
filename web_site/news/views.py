@@ -31,10 +31,10 @@ def view_news(request, news_id):
 
 def add_news(request):
     if request.method == 'POST':
-        form = NewsForm(request.POST)
+        form = NewsForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            redirect('home')
+            news = form.save()
+            return redirect('home')
     else:
         form = NewsForm()
     return render(request, 'news/add_news.html', {'form': form})
