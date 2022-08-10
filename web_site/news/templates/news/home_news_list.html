@@ -9,6 +9,7 @@
     {% endblock %}
 
 {% block content %}
+<!--{{ mixin_prop }}-->
 {% for item in news %}
     <div class="card mb-3">
       <div class="card-header">
@@ -22,13 +23,14 @@
           {% endif %}
             <div class="media-body mt-3">
                 <h5 class="card-title">{{ item.title }}</h5>
-                <p class="card-text">{{ item.content | linebreaks | truncatewords:40 }}</p>
+                <p class="card-text">{{ item.content | linebreaks | truncatewords:20 }}</p>
                 <a href="{{ item.get_absolute_url }}" class="btn btn-light">Read more...</a>
             </div>
         </div>
       </div>
-      <div class="card-footer text-muted">
+      <div class="card-footer text-muted d-flex justify-content-between">
         {{ item.created_at|date:"Y-m-d H:i"}}
+        <span class="badge bg-success text-center rounded-3">{{ item.views }}</span>
       </div>
     </div>
 {% endfor %}

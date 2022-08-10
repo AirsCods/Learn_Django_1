@@ -18,6 +18,9 @@ from .views import *
 
 
 urlpatterns = [
+    path('test/', test, name='test'),
+    path('register/', register, name='register'),
+    path('login/', login, name='login'),
     # path('', index, name='home'),
     path('', HomeNews.as_view(), name='home'),
     # path('cat/<int:category_id>', get_category, name='category'),
