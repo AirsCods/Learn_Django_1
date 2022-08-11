@@ -19,6 +19,7 @@ from .views import *
 
 urlpatterns = [
     path('test/', send_user_mail, name='test'),
+    path('contacts/', send_user_mail, name='contacts'),
     path('register/', register, name='register'),
     path('login/', user_login, name='login'),
     path('logout/', user_logout, name='logout'),

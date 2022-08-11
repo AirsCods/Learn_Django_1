@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, logout
 from django.contrib import messages
 from django.core.paginator import Paginator
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMessage
 from .models import News, Category
 from .forms import NewsForm, UserRegisterForm, UserLoginForm, ContactForm
 from .utils import MyMixin
@@ -15,13 +15,18 @@ def send_user_mail(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            mail = send_mail(
-                form.cleaned_data['subject'],
-                form.cleaned_data['content'],
-                'frankicods@gmail.com',
-                ['airscods@gmail.com'],
-                fail_silently=True
+            # mail = send_mail(
+            #     subject=form.cleaned_data['subject'],
+            #     message=form.cleaned_data['content'],
+            #     recipient_list=['airscods@gmail.com'],
+            #     fail_silently=True,
+            # )
+            mail = EmailMessage(
+                subject=form.cleaned_data['subject'],
+                body=form.cleaned_data['content'],
+                to=['airscods@gmail.com', 'frankicods@gmail.com'],
             )
+            mail.send(fail_silently=True)
             if mail:
                 messages.success(request, 'Письмо успешно отправлено!')
                 return redirect('test')
@@ -31,7 +36,7 @@ def send_user_mail(request):
             messages.error(request, 'Ошибка ввода')
     else:
         form = ContactForm()
-    return render(request, 'news/test.html', {'form': form})
+    return render(request, 'news/contacts.html', {'form': form})
 
 
 def register(request):
@@ -71,7 +76,7 @@ class HomeNews(MyMixin, ListView):
     template_name = 'news/home_news_list.html'
     context_object_name = 'news'
     mixin_prop = 'hello world'
-    paginate_by = 10
+    paginate_by = 3
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
