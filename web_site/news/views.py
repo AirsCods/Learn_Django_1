@@ -15,12 +15,6 @@ def send_user_mail(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            # mail = send_mail(
-            #     subject=form.cleaned_data['subject'],
-            #     message=form.cleaned_data['content'],
-            #     recipient_list=['airscods@gmail.com'],
-            #     fail_silently=True,
-            # )
             mail = EmailMessage(
                 subject=form.cleaned_data['subject'],
                 body=form.cleaned_data['content'],
@@ -33,7 +27,7 @@ def send_user_mail(request):
             else:
                 messages.error(request, 'Ошибка отправки')
         else:
-            messages.error(request, 'Ошибка ввода')
+            messages.error(request, 'Ошибка валидации')
     else:
         form = ContactForm()
     return render(request, 'news/contacts.html', {'form': form})
@@ -93,7 +87,7 @@ class NewsByCategory(MyMixin, ListView):
     template_name = 'news/home_news_list.html'
     context_object_name = 'news'
     allow_empty = False
-    paginate_by = 2
+    paginate_by = 10
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)

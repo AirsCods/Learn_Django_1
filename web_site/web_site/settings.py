@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'hcaptcha_field',
     'news.apps.NewsConfig',
     'debug_toolbar',
     'ckeditor',
@@ -146,6 +147,20 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
 EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL')
 DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
+
+#  Captcha
+HCAPTCHA_SITEKEY = os.environ.get('HCAPTCHA_SITEKEY')
+HCAPTCHA_SECRET = os.environ.get('HCAPTCHA_SECRET')
+# HCAPTCHA_DEFAULT_CONFIG = {
+#     'onload': 'name_of_js_function',
+#     'render': 'explicit',
+#     'theme': 'dark',  # do not use data- prefix
+#     'size': 'compact',  # do not use data- prefix
+# }
+HCAPTCHA_PROXIES = {
+   'http': 'http://127.0.0.1:8000',
+}
+HCAPTCHA_TIMEOUT = 2
 
 # Example ckeditor configuration
 CKEDITOR_CONFIGS = {
