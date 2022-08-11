@@ -20,11 +20,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-pj!&$jj+o9y1$2+5bd+q18x&+=6uad56i2%$+c&7(f^q&bhdd-'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
+# SECRET_KEY = 'django-insecure-pj!&$jj+o9y1$2+5bd+q18x&+=6uad56i2%$+c&7(f^q&bhdd-'
+SECRET_KEY = os.environ.get('SECRET_KEY')
+DEBUG = os.environ.get('DEBUG')
 ALLOWED_HOSTS = []
 
 
@@ -133,3 +131,11 @@ INTERNAL_IPS = ["127.0.0.1"]
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Gmail SMTP settings
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_PORT = os.environ.get('EMAIL_PORT')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
+EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL')

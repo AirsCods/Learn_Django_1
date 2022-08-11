@@ -18,10 +18,10 @@ from .views import *
 
 
 urlpatterns = [
-    path('test/', test, name='test'),
+    path('test/', send_user_mail, name='test'),
     path('register/', register, name='register'),
-    path('login/', login, name='login'),
-    # path('', index, name='home'),
+    path('login/', user_login, name='login'),
+    path('logout/', user_logout, name='logout'),
     path('', HomeNews.as_view(), name='home'),
     # path('cat/<int:category_id>', get_category, name='category'),
     path('cat/<int:category_id>', NewsByCategory.as_view(), name='category'),
