@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, logout
 from django.contrib import messages
 from django.core.paginator import Paginator
-from django.core.mail import send_mail, EmailMessage
+from django.core.mail import EmailMessage
 from .models import News, Category
 from .forms import NewsForm, UserRegisterForm, UserLoginForm, ContactForm
 from .utils import MyMixin
